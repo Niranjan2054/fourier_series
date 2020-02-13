@@ -233,7 +233,7 @@
 1341006774 c:\program files (x86)\codeblocks\mingw\include\math.h
 	<_mingw.h>
 
-1581352796 source:e:\cpp\fourier_series\main.cpp
+1581611719 source:e:\cpp\fourier_series\main.cpp
 	<windows.h>
 	<GL/glut.h>
 	<stdio.h>
