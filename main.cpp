@@ -60,8 +60,7 @@ void drawCircle(float (*f)(int,float,float),float L,int n,int xc, int yc)
     glBegin(GL_POINTS);
     for(float i = 0;i<2*L;i+=0.075){
         y = f(n,i,L);
-        x = square1(n,i,L);
-//            printf("%f %f\n",x,y);
+        x = triangle1(n,i,L);
         glVertex2f(x+xc,y+yc);
     }
     glEnd();
@@ -73,7 +72,7 @@ float drawFourierCircle(float (*f)(int,float,float),float L,int no_of_iteration,
     int xc, yc;
     for(int n=1;n<=no_of_iteration+1;n++){
         yc = fourier_series(f,x,L,n-1);
-        xc = fourier_series(square1,x,L,n-1);
+        xc = fourier_series(triangle1,x,L,n-1);
         if(n<=no_of_iteration){
             drawCircle(f,L,n,xc,yc);
         }
@@ -99,7 +98,7 @@ void display()
     int iteration = 5;
     int offset= 300;
     int time_period=120;
-    for(float i = 0;i<600;i+=0.1){
+    for(float i = 0;i<600;i+=0.6){
         glClear(GL_COLOR_BUFFER_BIT); // Clear display window
 
 
@@ -110,10 +109,10 @@ void display()
         for(float j = 0;j<i;j+=0.02)
         {
 
-            x= fourier_series(square,j,time_period,iteration);
+            x= fourier_series(triangle,j,time_period,iteration);
 
             if(j!=0){
-                glColor3f(i/600,j/i,x/200);
+                glColor3f(j/i,i/600,x/200);
                 glBegin(GL_LINES);
                     glVertex2f(tempi+offset,tempx);
                     glVertex2f(j+offset,x);
@@ -121,8 +120,8 @@ void display()
             }
             tempi= j;tempx=x;
         }
-        drawFourierCircle(square,time_period,iteration,i);
-        printf("i = %f, x = %f\n",i,x);
+        drawFourierCircle(triangle,time_period,iteration,i);
+      //  printf("i = %f, x = %f\n",i,x);
         glFlush();
     }
 
